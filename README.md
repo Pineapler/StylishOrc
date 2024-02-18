@@ -1,51 +1,33 @@
-# Orc Massage Mod Template
+# StylishOrc
 
-## Setting up your mod info
+A mod that adds clothing options to the massage minigames in Orc Massage.
 
-1. Find and replace all `MY_MOD_NAME`, e.g. "OrcDance" (note: also rename directories and files)
-2. Find and replace all `MY_LOWERCASE_MOD_NAME`, e.g. "orcdance"
-3. Find and replace all `MY_LOWERCASE_USERNAME`, e.g. "pineapler"
+## Installation
 
-## Setting up game assemblies
+1. Install [BepInEx](https://docs.bepinex.dev/articles/user_guide/installation/index.html)
+2. Unzip the package into the BepInEx directory
+3. Run the game
 
-Game specific assemblies (Assembly-CSharp.dll, etc.) should not be tracked by version control. You must provide
-your own copy of this file.
+## Options
 
-1. Copy `<game_install_dir>/OrcMassage_Data/Managed/Assembly-CSharp.dll` into `<mod_dir>/Libs`
+After running the mod the first time, a configuration file will be created at `<game>/BepInEx/config/com.pineapler.stylishorc.cfg`
 
-If your mod requires access to other non-default Unity code, you will also need to copy the dll from the game directory 
-and reference it in your project.
-For example, if you needed access to Cinemachine:
+Available options:
 
-1. Copy `<game_install_dir>/OrcMassage_Data/Managed/Cinemachine.dll` into `<mod_dir>/Libs`
-2. Open your .csproj file and add a new entry under the comment `<!-- ADD ASSEMBLY REFERENCES HERE -->`
-```xml
-<Reference Include="Cinemachine">
-    <HintPath>Libs\Cinemachine.dll</HintPath>
-</Reference>
-```
+### `UnlockAll` (default: false)
 
-## Installing BepInEx
+When this is enabled, all clothing options are available from the start of the game. When disabled,
+the option to change a client's clothes will be unlocked once you gain enough reputation with them.
 
-If your installation of Orc Massage has not yet been modded, you will need to install [BepInEx](https://github.com/BepInEx/BepInEx/releases).
+## Using the mod
 
-Simply extract the zip folder into your `<game_install_dir>`.
+A dropdown labeled "Clothes" is available on the Massage Plan screen. Note that if you have low reputation
+with a client and `UnlockAll` is disabled, this dropdown may be locked.
 
-I also recommend enabling the following setting in `<game_install_dir>/BepInEx/config/BepInEx.cfg`:
-```toml
-[Logging.Console]
-Enabled = true
-```
+- If none of the settings are changed, the default outfit based on your reputation will be used.
+- If you change any of the settings, the currently equipped clothes will be used instead.
 
-## Running your mod
+### Todo
 
-Using your IDE of choice (or by running `dotnet build` from the terminal), build your project.
-It should output a file: `bin/Debug/netstandard2.1/MY_MOD_NAME.dll`.
-
-Copy this file into `<game_install_dir>/BepInEx/plugins/MY_MOD_NAME/MY_MOD_NAME.dll`, creating the directory if needed.
-
-Run the game, and it should launch with your mod.
-
-NOTE: I have included a Run configuration for JetBrains Rider that performs these steps automatically. 
-Set the following environment variable for this configuration to work:
-- `ORC_MASSAGE_DIR` - same as `<game_install_dir>`
+- [ ] Outfits should probably be available throughout the entire massage
+- [ ] Make sure first time changing clothes is consistent

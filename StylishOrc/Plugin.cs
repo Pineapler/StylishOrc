@@ -3,15 +3,15 @@ using System.Reflection;
 using BepInEx;
 using HarmonyLib;
 
-namespace MY_MOD_NAME;
+namespace StylishOrc;
 
 [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
 public class Plugin : BaseUnityPlugin {
     // ==========================================================
     // GAME CONFIGURATION
-    public const string PluginGuid = "com.MY_LOWERCASE_USERNAME.MY_LOWERCASE_MOD_NAME";
-    public const string PluginName = "MY_MOD_NAME";
-    public const string PluginVersion = "0.0.1";
+    public const string PluginGuid = "com.pineapler.stylishorc";
+    public const string PluginName = "StylishOrc";
+    public const string PluginVersion = "1.0.0";
     // ==========================================================
 
     public static new Config Config { get; private set; }
@@ -21,9 +21,10 @@ public class Plugin : BaseUnityPlugin {
         
         Log.SetSource(Logger);
         Log.Info($"Plugin {PluginGuid} is starting");
-        
-        // TODO: Use a Harmony patch to create an EntryPoint gameObject at the correct time.
-        // See Patches/EntryPointPatch.cs for an example that creates an entry point after GameManager.Start()
+        if (Config.ModEnabled.Value == false) {
+            Log.Warning($"{PluginName} is disabled");
+            return;
+        }
 
         Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
     }
