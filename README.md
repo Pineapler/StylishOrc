@@ -2,11 +2,16 @@
 
 A mod that adds clothing options to the massage minigames in Orc Massage.
 
+![In-game image](Media/in-game-01.png)
+
 ## Installation
+
+* Install through Vortex Mod Manager
+
+or
 
 1. Install [BepInEx](https://docs.bepinex.dev/articles/user_guide/installation/index.html)
 2. Unzip the package into the BepInEx directory
-3. Run the game
 
 ## Options
 
