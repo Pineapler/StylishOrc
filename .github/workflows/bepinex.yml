@@ -38,7 +38,7 @@ jobs:
         run: |
           $VERSION="${{ github.ref_name }}".substring(1)
           $env:PATH += ";C:\Program Files\Git\usr\bin"
-          mkdir -p staging\BepInEx\plugins\$env:PLUGIN\
+          mkdir -p staging\plugins\$env:PLUGIN\
           mkdir -p publish\
       
       - name: Build mod
@@ -46,13 +46,13 @@ jobs:
         run: |
           sed -i 's/0\.0\.0/$VERSION/' $env:PLUGIN/plugin.cs
           dotnet build
-          cp bin\Debug\netstandard2.1\$env:PLUGIN.dll staging\BepInEx\plugins\$env:PLUGIN\$env:PLUGIN.dll
-          If (Test-Path .\RuntimeDeps) { cp -r .\RuntimeDeps .\staging\BepInEx\plugins\$env:PLUGIN\ }
+          cp bin\Debug\netstandard2.1\$env:PLUGIN.dll staging\plugins\$env:PLUGIN\$env:PLUGIN.dll
+          If (Test-Path .\RuntimeDeps) { cp -r .\RuntimeDeps .\staging\plugins\$env:PLUGIN\ }
       
       - name: Zip package
         id: zip
         run: |
-          Compress-Archive -Path staging\BepInEx\ -DestinationPath publish\$env:PLUGIN.zip
+          Compress-Archive -Path staging\* -DestinationPath publish\$env:PLUGIN.zip
       
       - name: GitHub release
         uses: softprops/action-gh-release@v2
